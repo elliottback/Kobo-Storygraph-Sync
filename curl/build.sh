@@ -5,7 +5,7 @@ export CC=clang
 export ARCH=armhf
 export CURL_TAG=curl-8_14_1
 
-# script
+# script dependencies
 set -e
 
 apk add git build-base clang openssl-dev nghttp2-dev nghttp2-static libssh2-dev libssh2-static perl openssl-libs-static zlib-static
@@ -16,6 +16,8 @@ rm -rf curl || true
 git clone https://github.com/curl/curl.git --branch "$CURL_TAG" --depth 1
 
 cd curl
+
+# build
 
 export CFLAGS="-Os -ffunction-sections -fdata-sections -fno-unwind-tables -fno-asynchronous-unwind-tables -flto"
 export LDFLAGS="-static -Wl,-s -Wl,-Bsymbolic -Wl,--gc-sections"
