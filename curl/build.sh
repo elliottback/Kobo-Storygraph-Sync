@@ -77,6 +77,9 @@ autoreconf -fi
   --without-ntlm-auth \
   --with-wolfssl
 
+log_info "Applying patches..."
+sed -i 's/#ifndef NO_SHA256/#if defined(OPENSSL_EXTRA) \&\& !defined(NO_SHA256)/' lib/sha256.c
+
 log_info "Starting make..."
 make -j4 V=1 LDFLAGS="-static -all-static"
 
