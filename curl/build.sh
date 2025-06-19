@@ -5,7 +5,6 @@ log_error() { echo "$(date +'%Y-%m-%d %H:%M:%S') [ERROR] $*" >&2; }
 
 # settings
 export CC=clang
-export ARCH=armhf
 export CURL_TAG=curl-8_14_1
 
 # script dependencies
