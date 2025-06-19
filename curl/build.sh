@@ -12,7 +12,7 @@ export CURL_TAG=curl-8_14_1
 set -e
 
 log_info "Installing dependencies..."
-apk add git autoconf automake libtool wolfssl-dev build-base clang openssl-dev nghttp2-dev nghttp2-static libssh2-dev libssh2-static perl openssl-libs-static zlib-static
+apk add git autoconf automake libtool build-base clang openssl-dev nghttp2-dev nghttp2-static libssh2-dev libssh2-static perl openssl-libs-static zlib-static
 
 log_info "Removing old curl directory if exists..."
 # remove curl dir if it is there
@@ -75,7 +75,7 @@ autoreconf -fi
   --without-libssh2 \
   --without-nghttp2 \
   --without-ntlm-auth \
-  --with-wolfssl
+  --with-openssl
 
 log_info "Applying patches..."
 sed -i 's/#ifndef NO_SHA256/#if defined(OPENSSL_EXTRA) \&\& !defined(NO_SHA256)/' lib/sha256.c
