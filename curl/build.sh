@@ -8,7 +8,7 @@ export CURL_TAG=curl-8_14_1
 # script dependencies
 set -e
 
-apk add git autoconf build-base clang openssl-dev nghttp2-dev nghttp2-static libssh2-dev libssh2-static perl openssl-libs-static zlib-static
+apk add git autoconf automake build-base clang openssl-dev nghttp2-dev nghttp2-static libssh2-dev libssh2-static perl openssl-libs-static zlib-static
 
 # remove curl dir if it is there
 rm -rf curl || true
