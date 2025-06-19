@@ -12,7 +12,7 @@ export CURL_TAG=curl-8_14_1
 set -e
 
 log_info "Installing dependencies..."
-apk add git autoconf automake libtool wolfssl build-base clang openssl-dev nghttp2-dev nghttp2-static libssh2-dev libssh2-static perl openssl-libs-static zlib-static
+apk add git autoconf automake libtool wolfssl-dev build-base clang openssl-dev nghttp2-dev nghttp2-static libssh2-dev libssh2-static perl openssl-libs-static zlib-static
 
 log_info "Removing old curl directory if exists..."
 # remove curl dir if it is there
