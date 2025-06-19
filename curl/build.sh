@@ -12,7 +12,7 @@ git clone https://github.com/curl/curl.git --depth 1 --branch $TAG
 
 cd curl
 
-apk add build-base clang openssl-dev nghttp2-dev nghttp2-static libssh2-dev libssh2-static perl openssl-libs-static zlib-static
+apk add git build-base clang openssl-dev nghttp2-dev nghttp2-static libssh2-dev libssh2-static perl openssl-libs-static zlib-static
 
 export CFLAGS="-Os -ffunction-sections -fdata-sections -fno-unwind-tables -fno-asynchronous-unwind-tables -flto"
 export LDFLAGS="-static -Wl,-s -Wl,-Bsymbolic -Wl,--gc-sections"
