@@ -3,20 +3,20 @@
 # settings
 export CC=clang
 export ARCH=armhf
-export CURL_SOURCE=https://github.com/curl/curl/archive/refs/tags/curl-8_14_1.tar.gz
+export CURL_TAG=curl-8_14_1
 
 # script
 set -e
 
-apk add build-base clang openssl-dev nghttp2-dev nghttp2-static libssh2-dev libssh2-static perl openssl-libs-static zlib-static
+apk add git build-base clang openssl-dev nghttp2-dev nghttp2-static libssh2-dev libssh2-static perl openssl-libs-static zlib-static
 
-wget $CURL_SOURCE -O /tmp/curl.tar.gz
-tar xzf /tmp/curl.tar.gz
-cd curl*
+git clone https://github.com/curl/curl.git --branch "$CURL_TAG" --depth 1
 
 export CFLAGS="-Os -ffunction-sections -fdata-sections -fno-unwind-tables -fno-asynchronous-unwind-tables -flto"
 export LDFLAGS="-static -Wl,-s -Wl,-Bsymbolic -Wl,--gc-sections"
 export PKG_CONFIG="pkg-config --static"
+
+autoreconf -fi
 
 ./configure \
   --disable-shared \
