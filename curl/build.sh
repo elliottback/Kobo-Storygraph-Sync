@@ -75,7 +75,7 @@ autoreconf -fi
   --without-libssh2 \
   --without-nghttp2 \
   --without-ntlm-auth \
-  --with-wolfssl=[install prefix]
+  --with-wolfssl
 
 log_info "Starting make..."
 make -j4 V=1 LDFLAGS="-static -all-static"
