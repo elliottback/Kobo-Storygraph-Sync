@@ -4,7 +4,7 @@ log_info() { echo "$(date +'%Y-%m-%d %H:%M:%S') [INFO] $*"; }
 log_error() { echo "$(date +'%Y-%m-%d %H:%M:%S') [ERROR] $*" >&2; }
 
 # settings
-export CC=clang
+export CC="clang --target=armv7-linux-musleabihf"
 export CURL_TAG=curl-8_14_1
 
 # script dependencies
@@ -24,13 +24,14 @@ cd curl
 
 log_info "Configuring build environment..."
 # build
-export CFLAGS="-Os -ffunction-sections -fdata-sections -fno-unwind-tables -fno-asynchronous-unwind-tables -flto"
+export CFLAGS="--target=armv7-linux-musleabihf -Os -ffunction-sections -fdata-sections -fno-unwind-tables -fno-asynchronous-unwind-tables -flto"
 export LDFLAGS="-static -Wl,-s -Wl,-Bsymbolic -Wl,--gc-sections"
 export PKG_CONFIG="pkg-config --static"
 
 autoreconf -fi
 
 ./configure \
+  --host=armv7-linux-musleabihf \
   --disable-shared \
   --enable-static \
   --disable-ldap \
