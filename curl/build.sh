@@ -5,7 +5,7 @@ log_error() { echo "$(date +'%Y-%m-%d %H:%M:%S') [ERROR] $*" >&2; }
 
 # settings
 export CC="clang --target=armv7-linux-musleabihf"
-export CURL_TAG=curl-8_14_1
+export TINY_CURL_URL="https://curl.se/tiny/tiny-curl-8.4.0.tar.gz"
 
 # script dependencies
 set -e
@@ -14,13 +14,20 @@ log_info "Installing dependencies..."
 apk add git autoconf automake libtool build-base clang openssl-dev nghttp2-dev nghttp2-static libssh2-dev libssh2-static perl openssl-libs-static zlib-static
 
 log_info "Removing old curl directory if exists..."
-# remove curl dir if it is there
 rm -rf curl || true
 
-## todo: base it off https://curl.se/tiny/tiny-curl-8.4.0.tar.gz
+log_info "Downloading tiny-curl tarball..."
+wget -O tiny-curl.tar.gz "$TINY_CURL_URL"
 
-log_info "Cloning curl repository..."
-git clone https://github.com/curl/curl.git --branch "$CURL_TAG" --depth 1
+log_info "Extracting tiny-curl..."
+tar -xzf tiny-curl.tar.gz
+
+# Find the extracted directory (should be tiny-curl-8.4.0)
+EXTRACTED_DIR=$(tar -tf tiny-curl.tar.gz | head -1 | cut -f1 -d"/")
+
+# Rename to 'curl' for compatibility with the rest of the script
+mv "$EXTRACTED_DIR" curl
+rm tiny-curl.tar.gz
 
 cd curl
 
