@@ -17,6 +17,8 @@ log_info "Removing old curl directory if exists..."
 # remove curl dir if it is there
 rm -rf curl || true
 
+## todo: base it off https://curl.se/tiny/tiny-curl-8.4.0.tar.gz
+
 log_info "Cloning curl repository..."
 git clone https://github.com/curl/curl.git --branch "$CURL_TAG" --depth 1
 
